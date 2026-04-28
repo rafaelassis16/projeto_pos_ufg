@@ -31,7 +31,30 @@ graph LR
 
 ---
 
-## 3. Modelo de Dados
+---
+
+## 3. Configuração do Banco de Dados (SQLite)
+
+O projeto utiliza **SQLite** para persistência local, configurado através do **SQLAlchemy**.
+
+### Detalhes da Implementação:
+- **Engine:** Configurada com `connect_args={"check_same_thread": False}` para permitir que o SQLite seja utilizado de forma assíncrona pelo FastAPI.
+- **SessionLocal:** Fábrica de sessões para interagir com o banco de dados.
+- **Base:** Classe base para todos os modelos declarativos.
+- **Dependency Injection (`get_db`):** Utilizamos uma função geradora para abrir e fechar sessões de banco de dados automaticamente em cada requisição:
+
+```python
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+```
+
+---
+
+## 4. Modelo de Dados
 
 ### Tabela: `tasks`
 | Campo | Tipo | Descrição |
@@ -44,7 +67,7 @@ graph LR
 
 ---
 
-## 4. Lógica de Negócio: PriorityAdvisor
+## 5. Lógica de Negócio: PriorityAdvisor
 
 Um diferencial da aplicação é o `PriorityAdvisor`. Ele analisa o título e a descrição da tarefa durante a criação para sugerir uma prioridade automática baseada em palavras-chave:
 
@@ -54,7 +77,7 @@ Um diferencial da aplicação é o `PriorityAdvisor`. Ele analisa o título e a 
 
 ---
 
-## 5. API Reference (Principais Endpoints)
+## 6. API Reference (Principais Endpoints)
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
@@ -67,7 +90,7 @@ Um diferencial da aplicação é o `PriorityAdvisor`. Ele analisa o título e a 
 
 ---
 
-## 6. Frontend
+## 7. Frontend
 
 O frontend foi construído com **React (TypeScript)** e utiliza o **WEG Design System (@weg-react-ui)**.
 
@@ -79,7 +102,7 @@ O frontend foi construído com **React (TypeScript)** e utiliza o **WEG Design S
 
 ---
 
-## 7. Estratégia de Testes
+## 8. Estratégia de Testes
 
 A aplicação possui **95% de cobertura** de testes automatizados, divididos em:
 
@@ -88,7 +111,7 @@ A aplicação possui **95% de cobertura** de testes automatizados, divididos em:
 
 ---
 
-## 8. Processo de Desenvolvimento com IA
+## 9. Processo de Desenvolvimento com IA
 
 A Inteligência Artificial (**Antigravity**) atuou como um **Pair Programmer**, auxiliando em:
 - Definição da arquitetura baseada no descritivo do projeto.
@@ -99,7 +122,7 @@ A Inteligência Artificial (**Antigravity**) atuou como um **Pair Programmer**, 
 
 ---
 
-## 9. Instruções de Execução
+## 10. Instruções de Execução
 
 ### Backend:
 1. Ativar ambiente virtual: `.venv\Scripts\activate`
