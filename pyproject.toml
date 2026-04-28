@@ -1,0 +1,35 @@
+[project]
+name = "todo-api"
+version = "1.0.0"
+description = "Micro-API de Gerenciamento de Tarefas"
+authors = [
+    { name = "Rafael Amancio" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.136.1",
+    "sqlalchemy>=2.0.49",
+    "pydantic>=2.13.3",
+    "uvicorn>=0.46.0",
+    "python-dotenv>=1.2.2",
+    "httpx>=0.28.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-cov",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["app/tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/tests/*"]
