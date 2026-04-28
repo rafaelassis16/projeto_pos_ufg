@@ -238,17 +238,16 @@ Os resultados detalhados são salvos em `app/tests/results/`.
 
 ## 🤖 Uso de Inteligência Artificial
 
-A IA generativa foi utilizada seguindo estas diretrizes:
+A IA Generativa (**Antigravity**) foi utilizada como um "Pair Programmer" em todo o ciclo de vida do MVP:
 
-- **Contexto:** API REST com FastAPI, SQLAlchemy e SQLite.
-- **Objetivo:** Geração de endpoints CRUD completos.
-- **Requisitos:**
-    - `POST /tasks`
-    - `GET /tasks` (filtro opcional)
-    - `PUT /tasks/{id}`
-    - `DELETE /tasks/{id}`
-    - `PATCH /tasks/{id}/complete`
-- **Regras:** Uso de `SessionLocal`, `Depends(get_db)`, tratamento de erros 404 e código modular.
+1.  **Ideação e Arquitetura:** Sugestão da estrutura de pastas e divisão em camadas (Service, Repository, Controller) para garantir escalabilidade.
+2.  **Geração de Código (CRUD):** Implementação dos modelos SQLAlchemy, schemas Pydantic e lógica de negócio no `TaskService`.
+3.  **Lógica Assistida:** Criação do componente `PriorityAdvisor`, que utiliza processamento de texto simples para sugerir prioridades.
+4.  **Testes Automatizados:** Escrita completa da suíte de testes (unitários e integração) e configuração de relatórios de cobertura.
+5.  **Resolução de Problemas:** Identificação de erros de migração (colunas faltantes) e correção de encoding em logs do Windows.
+6.  **Documentação:** Auxílio na criação do diagrama Mermaid e na estruturação profissional deste README.
+
+Este projeto demonstra como a IA pode acelerar o desenvolvimento mantendo a qualidade técnica e seguindo boas práticas de engenharia de software.
 
 ---
 
