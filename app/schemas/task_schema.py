@@ -5,6 +5,7 @@ class TaskBase(BaseModel):
     title: str
     description: Optional[str] = None
     completed: bool = False
+    priority: Optional[str] = "Baixa"
 
 class TaskCreate(TaskBase):
     pass
