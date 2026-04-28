@@ -236,6 +236,15 @@ Os resultados detalhados são salvos em `app/tests/results/`.
 
 ---
 
+## 📹 Vídeos de Demonstração
+
+Para visualizar o funcionamento da aplicação na prática, consulte os vídeos na pasta `/Videos`:
+
+*   **[Teste backend.mp4](./Videos/Teste%20backend.mp4):** Demonstração da execução dos testes automatizados e funcionamento dos endpoints via Swagger.
+*   **[Teste frontend.mp4](./Videos/Teste%20frontend.mp4):** Demonstração da interface do usuário, criação, edição e exclusão de tarefas em tempo real.
+
+---
+
 ## 🤖 Uso de Inteligência Artificial
 
 A IA Generativa (**Antigravity**) foi utilizada como um "Pair Programmer" em todo o ciclo de vida do MVP:

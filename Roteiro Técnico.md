@@ -100,3 +100,8 @@ A cobertura atual do backend é de **92%**, conforme evidenciado abaixo:
 | app/models/task_model.py | 100% |
 
 Os relatórios detalhados são gerados em HTML no diretório `app/tests/results/htmlcov/`.
+
+### Vídeos de Demonstração
+Existem também dois vídeos na pasta `/Videos` que comprovam o funcionamento:
+- **Teste backend.mp4**: Execução da suíte de testes.
+- **Teste frontend.mp4**: Fluxo completo de uso da interface.
