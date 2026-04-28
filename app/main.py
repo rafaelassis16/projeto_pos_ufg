@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.database.db import Base, engine
+from app.models.task_model import Task
 from app.routes import task_routes
 
 app = FastAPI()
