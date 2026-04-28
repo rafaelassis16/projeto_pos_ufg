@@ -20,6 +20,30 @@ Este projeto foi desenvolvido como um **Produto Mínimo Viável (MVP)**, com esc
 
 ---
 
+## 🏗️ Arquitetura do Sistema
+
+```mermaid
+graph TD
+    User([Usuário/Frontend]) -- HTTP/JSON --> API[FastAPI App]
+    
+    subgraph Backend [Backend API]
+        API --> Routes[Routes / Controller]
+        Routes --> Service[TaskService]
+        Service --> Advisor[PriorityAdvisor]
+        Service --> Repo[Repository / SQLAlchemy]
+    end
+    
+    subgraph Persistence [Persistência]
+        Repo --> DB[(SQLite Database)]
+    end
+
+    style User fill:#f9f,stroke:#333,stroke-width:2px
+    style DB fill:#00d2ff,stroke:#333,stroke-width:2px
+    style Backend fill:#f5f5f5,stroke:#999,stroke-dasharray: 5 5
+```
+
+---
+
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
