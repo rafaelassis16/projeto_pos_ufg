@@ -51,10 +51,10 @@ Este projeto foi desenvolvido como um **Produto Mínimo Viável (MVP)**, com esc
 A aplicação segue uma arquitetura em camadas:
 
 * **Routes (Controller):** Recebe as requisições HTTP
-* **Services:** Contém as regras de negócio
-* **Repository:** Responsável pela persistência de dados
+* **Services:** Contém as regras de negócio e o **PriorityAdvisor**
+* **Repository:** Responsável pela persistência de dados (através do SQLAlchemy)
 * **Models:** Representação das entidades no banco
-* **Schemas:** Validação e serialização de dados
+* **Schemas:** Validação e serialização de dados (Pydantic)
 
 ---
 
@@ -70,7 +70,10 @@ projeto_pos_ufg/
 │   ├── repository/
 │   ├── routes/
 │   ├── schemas/
-│   └── services/
+│   ├── services/
+│   └── tests/
+│       ├── results/         # Relatórios de testes e cobertura
+│       └── unit/            # Testes unitários
 │
 ├── .gitignore
 ├── requirements.txt
@@ -166,11 +169,14 @@ PATCH /tasks/{id}/complete
 
 ## 🧪 Testes
 
-Para executar os testes:
+Para executar os testes e gerar relatório de cobertura:
 
 ```
-pytest
+pytest --cov=app --cov-report=term-missing
 ```
+
+Os resultados detalhados são salvos em `app/tests/results/`.
+**Cobertura atual: 94%**
 
 ---
 
