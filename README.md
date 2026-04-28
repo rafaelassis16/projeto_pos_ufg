@@ -149,6 +149,25 @@ uvicorn app.main:app --reload
 
 ---
 
+## 🎨 Executar Frontend (React)
+
+O frontend foi desenvolvido utilizando o **WEG Design System**.
+
+### 1. Instalar dependências
+
+```bash
+cd frontend
+npm install
+```
+
+### 2. Rodar em modo de desenvolvimento
+
+```bash
+npm run dev
+```
+
+---
+
 ## 🌐 Acessar a API
 
 Documentação interativa (Swagger):
