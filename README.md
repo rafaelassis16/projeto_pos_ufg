@@ -189,18 +189,27 @@ Os resultados detalhados são salvos em `app/tests/results/`.
 
 ## 🤖 Uso de Inteligência Artificial
 
-A IA generativa foi utilizada em diversas etapas do projeto:
+A IA generativa foi utilizada seguindo estas diretrizes:
 
-* Geração de código base (CRUD)
-* Sugestão de arquitetura
-* Criação de testes automatizados
-* Geração de documentação (README)
-* Refatoração e melhoria de código
+- **Contexto:** API REST com FastAPI, SQLAlchemy e SQLite.
+- **Objetivo:** Geração de endpoints CRUD completos.
+- **Requisitos:**
+    - `POST /tasks`
+    - `GET /tasks` (filtro opcional)
+    - `PUT /tasks/{id}`
+    - `DELETE /tasks/{id}`
+    - `PATCH /tasks/{id}/complete`
+- **Regras:** Uso de `SessionLocal`, `Depends(get_db)`, tratamento de erros 404 e código modular.
 
-Ferramentas utilizadas:
+---
 
-* ChatGPT
-* GitHub Copilot
+## 🎨 Frontend (Futuro)
+
+Para a implementação do frontend, deve-se utilizar obrigatoriamente a skill **design-system** baseada no **WEG Design System (@weg-react-ui)**, garantindo:
+- Componentes React consistentes.
+- Layouts com Grid de 12 colunas.
+- Formulários com React Hook Form + Zod.
+- Uso de `DataTable` para listagens.
 
 ---
 
@@ -232,7 +241,15 @@ Versão atual:
 v1.0.0
 ```
 
+## 🛠️ Ferramentas Utilizadas
+
+- **Backend:** Python, FastAPI, SQLAlchemy, SQLite
+- **Testes:** Pytest, Pytest-cov
+- **IA:** Antigravity (Google DeepMind)
+- **IDEs:** Cursor / VS Code
+
 ---
+
 
 ## 👨‍💻 Autor
 
