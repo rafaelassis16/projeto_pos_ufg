@@ -64,17 +64,16 @@ A aplicação segue uma arquitetura em camadas:
 projeto_pos_ufg/
 │
 ├── app/
-│   ├── main.py
+│   ├── __init__.py
+│   ├── database/
 │   ├── models/
-│   ├── schemas/
-│   ├── routes/
-│   ├── services/
 │   ├── repository/
-│   └── database/
+│   ├── routes/
+│   ├── schemas/
+│   └── services/
 │
-├── tests/
-├── requirements.txt
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 
