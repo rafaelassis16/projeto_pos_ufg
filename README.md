@@ -61,7 +61,7 @@ A aplicação segue uma arquitetura em camadas:
 ## 📁 Estrutura de Pastas
 
 ```
-todo-api/
+projeto_pos_ufg/
 │
 ├── app/
 │   ├── main.py
@@ -85,8 +85,8 @@ todo-api/
 ### 1. Clonar o repositório
 
 ```
-git clone https://github.com/SEU_USUARIO/todo-api.git
-cd todo-api
+git clone https://github.com/rafaelassis16/projeto_pos_ufg.git
+cd projeto_pos_ufg
 ```
 
 ### 2. Criar ambiente virtual
