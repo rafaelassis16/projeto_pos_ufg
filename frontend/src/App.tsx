@@ -1,25 +1,27 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Button } from '@weg-react-ui/buttons';
-import { DataTable } from '@weg-react-ui/data-table';
-import { Dialog } from '@weg-react-ui/overlay';
-import { Field } from '@weg-react-ui/form';
-import { Input } from '@weg-react-ui/inputs';
-import { Flex, Grid, Box } from '@weg-react-ui/layout';
-import { Title, Text } from '@weg-react-ui/typography';
-import { Icon } from '@weg-react-ui/icons';
-import { useToast } from '@weg-react-ui/overlay';
+import { 
+  Button, 
+  DataTable, 
+  Dialog, 
+  Field, 
+  Input, 
+  Flex, 
+  Grid, 
+  Box, 
+  Title, 
+  Icon, 
+  useToast 
+} from './weg-ui-mock'; // Using mocks for demonstration
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import axios from 'axios';
 
-// API base URL (adjust if needed)
 const API_URL = 'http://127.0.0.1:8000';
 
-// Types
 interface Task {
   id: number;
-  title: str;
+  title: string;
   description?: string;
   completed: boolean;
   priority: string;
@@ -72,7 +74,7 @@ function App() {
       }
       setIsDialogOpen(false);
       setEditingTask(null);
-      reset();
+      reset({ title: '', description: '', priority: 'Baixa' });
       fetchTasks();
     } catch (err) {
       toast({ status: 'error', title: 'Erro ao salvar tarefa' });
@@ -99,19 +101,16 @@ function App() {
   };
 
   const columns = useMemo(() => [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'title', headerName: 'Título', flex: 1 },
-    { field: 'priority', headerName: 'Prioridade', width: 120 },
+    { field: 'id', headerName: 'ID' },
+    { field: 'title', headerName: 'Título' },
+    { field: 'priority', headerName: 'Prioridade' },
     { 
       field: 'completed', 
-      headerName: 'Status', 
-      width: 120,
+      headerName: 'Status',
       cellRenderer: (params: any) => (
         <Button 
-          size="small" 
-          variant="ghost" 
-          color={params.value ? 'success' : 'neutral'}
           onClick={() => handleToggleComplete(params.data)}
+          color={params.value ? 'neutral' : 'primary'}
         >
           {params.value ? 'Concluída' : 'Pendente'}
         </Button>
@@ -119,26 +118,12 @@ function App() {
     },
     {
       headerName: 'Ações',
-      width: 150,
       cellRenderer: (params: any) => (
         <Flex gap="small">
-          <Button 
-            size="small" 
-            variant="ghost" 
-            onClick={() => {
-              setEditingTask(params.data);
-              reset(params.data);
-              setIsDialogOpen(true);
-            }}
-          >
+          <Button onClick={() => { setEditingTask(params.data); reset(params.data); setIsDialogOpen(true); }}>
             <Icon name="pencil" />
           </Button>
-          <Button 
-            size="small" 
-            variant="ghost" 
-            color="danger"
-            onClick={() => handleDelete(params.data.id)}
-          >
+          <Button color="neutral" onClick={() => handleDelete(params.data.id)}>
             <Icon name="trash" />
           </Button>
         </Flex>
@@ -148,9 +133,9 @@ function App() {
 
   return (
     <Box p="large">
-      <Flex justify="space-between" align="center" mb="large">
+      <Flex justify="space-between" align="center">
         <Title level={1}>Gerenciador de Tarefas</Title>
-        <Button color="primary" onClick={() => { setEditingTask(null); reset(); setIsDialogOpen(true); }}>
+        <Button color="primary" onClick={() => { setEditingTask(null); reset({ title: '', description: '', priority: 'Baixa' }); setIsDialogOpen(true); }}>
           Nova Tarefa
         </Button>
       </Flex>
@@ -159,20 +144,18 @@ function App() {
         rowData={tasks} 
         columnDefs={columns}
         loading={isLoading}
-        pagination={true}
-        domLayout="autoHeight"
       />
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <Dialog open={isDialogOpen}>
         <Dialog.Content title={editingTask ? 'Editar Tarefa' : 'Nova Tarefa'}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid size={12} gap="medium">
+            <Grid gap="medium">
               <Grid.Cell span={12}>
                 <Controller
                   name="title"
                   control={control}
                   render={({ field }) => (
-                    <Field label="Título" required status={errors.title ? 'error' : undefined} statusText={errors.title?.message}>
+                    <Field label="Título" statusText={errors.title?.message}>
                       <Input.Text {...field} />
                     </Field>
                   )}
@@ -205,8 +188,8 @@ function App() {
                 />
               </Grid.Cell>
             </Grid>
-            <Flex justify="end" mt="large" gap="medium">
-              <Button variant="ghost" onClick={() => setIsDialogOpen(false)}>Cancelar</Button>
+            <Flex justify="end" style={{ marginTop: '20px' }}>
+              <Button type="button" onClick={() => setIsDialogOpen(false)}>Cancelar</Button>
               <Button color="primary" type="submit">Salvar</Button>
             </Flex>
           </form>
