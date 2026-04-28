@@ -64,21 +64,21 @@ graph TD
 
 ### Ferramentas de Apoio
 
-* VS Code
+* VS Code / Cursor
 * Git / GitHub
-* IA Generativa (ChatGPT / Copilot)
+* IA Generativa (Antigravity - Google DeepMind)
 
 ---
 
 ## 🏗️ Arquitetura do Projeto
 
-A aplicação segue uma arquitetura em camadas:
+A aplicação segue uma arquitetura em camadas para garantir separação de responsabilidades e facilidade de manutenção:
 
-* **Routes (Controller):** Recebe as requisições HTTP
-* **Services:** Contém as regras de negócio e o **PriorityAdvisor**
-* **Repository:** Responsável pela persistência de dados (através do SQLAlchemy)
-* **Models:** Representação das entidades no banco
-* **Schemas:** Validação e serialização de dados (Pydantic)
+* **Routes (Controller):** Gerencia as rotas e validações de entrada via FastAPI.
+* **Services:** Implementa a lógica de negócio, incluindo o **PriorityAdvisor** para sugestão automática de prioridade.
+* **Repository:** Encapsula o acesso a dados usando SQLAlchemy.
+* **Models:** Define a estrutura das tabelas no SQLite.
+* **Schemas:** Define os contratos de dados (DTOs) usando Pydantic.
 
 ---
 
@@ -246,33 +246,30 @@ A IA generativa foi utilizada seguindo estas diretrizes:
 
 ---
 
-## 🎨 Frontend (Futuro)
+## 🎨 Frontend (Implementado)
 
-Para a implementação do frontend, deve-se utilizar obrigatoriamente a skill **design-system** baseada no **WEG Design System (@weg-react-ui)**, garantindo:
-- Componentes React consistentes.
-- Layouts com Grid de 12 colunas.
-- Formulários com React Hook Form + Zod.
-- Uso de `DataTable` para listagens.
+O frontend foi desenvolvido utilizando React com TypeScript e o **WEG Design System (@weg-react-ui)**, seguindo os padrões:
+- **Componentes Consistentes:** Uso de `DataTable`, `Dialog`, `Button`, etc.
+- **Layout Responsivo:** Grid de 12 colunas para formulários.
+- **Formulários:** Integração com `React Hook Form` + `Zod` para validação robusta.
+- **Feedback Visual:** Toasts para ações de CRUD.
 
 ---
 
 ## ⚠️ Limitações
 
-* Não possui autenticação de usuários
+* Não possui autenticação de usuários (Login/JWT)
 * Banco de dados local (SQLite)
-* Cobertura de testes ainda básica
-* Não implementa paginação
+* Não implementa paginação no backend (feita no frontend pelo DataTable)
 
 ---
 
 ## 🚀 Próximos Passos
 
 * Implementar autenticação com JWT
-* Migrar banco para PostgreSQL
-* Adicionar paginação e filtros avançados
-* Melhorar cobertura de testes
-* Criar frontend em React
-* Deploy em ambiente cloud
+* Migrar banco para PostgreSQL (Produção)
+* Adicionar paginação e filtros avançados no servidor
+* Deploy em ambiente cloud (Docker/Vercel)
 
 ---
 
