@@ -141,28 +141,35 @@ Documentação interativa (Swagger):
 POST /tasks
 ```
 
-### Listar tarefas
+### Listar tarefas (com filtro opcional)
 
 ```
 GET /tasks
+GET /tasks?completed=true
 ```
 
-### Atualizar tarefa
+### Buscar tarefa por ID
+
+```
+GET /tasks/{id}
+```
+
+### Atualizar tarefa (Completo)
 
 ```
 PUT /tasks/{id}
+```
+
+### Marcar como concluída (Parcial)
+
+```
+PATCH /tasks/{id}/complete?completed=true
 ```
 
 ### Deletar tarefa
 
 ```
 DELETE /tasks/{id}
-```
-
-### Marcar como concluída
-
-```
-PATCH /tasks/{id}/complete
 ```
 
 ---
@@ -176,7 +183,7 @@ pytest --cov=app --cov-report=term-missing
 ```
 
 Os resultados detalhados são salvos em `app/tests/results/`.
-**Cobertura atual: 94%**
+**Cobertura atual: 95%**
 
 ---
 
