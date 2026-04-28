@@ -226,6 +226,12 @@ pytest --cov=app --cov-report=term-missing
 ```
 
 Os resultados detalhados são salvos em `app/tests/results/`.
+### Níveis de Teste Aplicados
+
+1.  **Testes Unitários:** Validam a lógica de negócio no `TaskService` e `PriorityAdvisor` de forma isolada.
+2.  **Testes de Integração (API):** Validam os endpoints utilizando `TestClient`, garantindo que rotas, filtros e códigos de status (200, 404, 422) funcionam como esperado.
+3.  **Isolamento de Dados:** Utilização de um banco de dados SQLite exclusivo para testes (`test.db`), garantindo a integridade do banco de desenvolvimento.
+
 **Cobertura atual: 95%**
 
 ---
