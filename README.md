@@ -270,6 +270,17 @@ O frontend foi desenvolvido utilizando React com TypeScript e o **WEG Design Sys
 
 ---
 
+## 📋 Artefatos de Especificação de Requisitos
+
+Documentação da atividade prática de elicitação e especificação (histórias de usuário, casos de uso, critérios de aceitação e protótipos):
+
+| Documento | Conteúdo |
+|-----------|----------|
+| [docs/Artefatos_Especificacao.md](./docs/Artefatos_Especificacao.md) | HU, UC, CA, RN/RNF, lacunas e rastreabilidade |
+| [docs/prototipos/](./docs/prototipos/) | Wireframes HTML e fluxos Mermaid |
+
+---
+
 ## ⚠️ Limitações
 
 * Não possui autenticação de usuários (Login/JWT)

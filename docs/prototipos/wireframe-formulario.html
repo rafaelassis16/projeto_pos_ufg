@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Protótipo — Formulário de Tarefa | To-Do API</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #fff;
+      --border: #d0d7de;
+      --primary: #0b5fff;
+      --text: #1f2328;
+      --muted: #656d76;
+      --danger: #cf222e;
+      --overlay: rgba(31, 35, 40, 0.45);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .badge-proto {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      background: #fff8c5;
+      border: 1px dashed #9a6700;
+      color: #7d4e00;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .backdrop {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px;
+      background:
+        linear-gradient(var(--overlay), var(--overlay)),
+        repeating-linear-gradient(0deg, #eaeef2 0 40px, #f4f6f8 40px 80px);
+    }
+    .modal {
+      width: min(480px, 100%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h1 { margin: 0; font-size: 1.15rem; }
+    .close {
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      color: var(--muted);
+      cursor: default;
+    }
+    .modal-body { padding: 20px; display: grid; gap: 16px; }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .req { color: var(--danger); }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .error {
+      font-size: 12px;
+      color: var(--danger);
+      margin-top: 4px;
+    }
+    .field-error input { border-color: var(--danger); }
+    .modal-footer {
+      padding: 14px 20px 18px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      border-top: 1px solid var(--border);
+      background: #f6f8fa;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: default;
+    }
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .panel {
+      max-width: 720px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+    }
+    .notes {
+      margin: -8px auto 32px;
+      max-width: 720px;
+      padding: 16px;
+      background: #ddf4ff;
+      border: 1px solid #54aeff;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .notes h2 { margin: 0 0 8px; font-size: 1rem; }
+    a { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <span class="badge-proto">PROTÓTIPO — Dialog de criação / edição (HU-01, HU-03, HU-08)</span>
+
+  <div class="backdrop">
+    <div class="modal" role="dialog" aria-labelledby="titulo-modal">
+      <div class="modal-header">
+        <h1 id="titulo-modal">Nova Tarefa</h1>
+        <button class="close" type="button" aria-label="Fechar">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-error">
+          <label for="titulo">Título <span class="req">*</span></label>
+          <input id="titulo" type="text" placeholder="Ex.: Entrega urgente do relatório" value="" />
+          <div class="error">Título é obrigatório (CA-08 / validação Zod)</div>
+        </div>
+        <div>
+          <label for="desc">Descrição</label>
+          <textarea id="desc" placeholder="Detalhes opcionais da tarefa"></textarea>
+          <div class="hint">Campo opcional (RN-06)</div>
+        </div>
+        <div>
+          <label for="prio">Prioridade</label>
+          <select id="prio">
+            <option value="Baixa" selected>Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+          </select>
+          <div class="hint">
+            O backend também pode sugerir prioridade via PriorityAdvisor (UC-06)
+            com base em palavras-chave no título/descrição.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" type="button">Cancelar</button>
+        <button class="btn btn-primary" type="button">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes panel">
+    <h2>Notas de design</h2>
+    <ul>
+      <li><strong>Modal sobre a lista:</strong> mantém contexto do DataTable (padrão de CRUD leve).</li>
+      <li><strong>Título obrigatório:</strong> feedback imediato no protótipo espelha CA-08.</li>
+      <li><strong>Mesmo formulário para criar e editar:</strong> reduz complexidade do MVP (UC-01 e UC-03).</li>
+      <li><strong>Prioridade editável:</strong> usuário pode ajustar a sugestão automática (ambiguidade tratada na especificação).</li>
+    </ul>
+    <p>
+      <a href="wireframe-lista.html">← Voltar ao wireframe da lista</a> ·
+      <a href="fluxos.md">Fluxos Mermaid</a>
+    </p>
+  </div>
+</body>
+</html>

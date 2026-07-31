@@ -46,3 +46,6 @@ coverage.xml
 
 # Environment variables
 .env
+
+# Postagem do fórum (uso local / não versionar)
+docs/Postagem_Forum.md

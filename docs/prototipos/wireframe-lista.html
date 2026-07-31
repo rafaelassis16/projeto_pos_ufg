@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Protótipo — Lista de Tarefas | To-Do API</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #fff;
+      --border: #d0d7de;
+      --primary: #0b5fff;
+      --text: #1f2328;
+      --muted: #656d76;
+      --ok: #1a7f37;
+      --warn: #9a6700;
+      --danger: #cf222e;
+      --alta: #cf222e;
+      --media: #9a6700;
+      --baixa: #59636e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+    .badge-proto {
+      display: inline-block;
+      background: #fff8c5;
+      border: 1px dashed #9a6700;
+      color: #7d4e00;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    h1 { margin: 0 0 4px; font-size: 1.6rem; }
+    .sub { color: var(--muted); margin-bottom: 20px; font-size: 0.95rem; }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: default;
+      font-size: 14px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .btn-sm { padding: 4px 8px; font-size: 12px; }
+    .btn-danger { color: var(--danger); border-color: #ffcecb; background: #ffebe9; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    th { background: #f6f8fa; color: var(--muted); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-alta { background: #ffebe9; color: var(--alta); }
+    .pill-media { background: #fff8c5; color: var(--media); }
+    .pill-baixa { background: #eaeef2; color: var(--baixa); }
+    .status {
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .status.done { background: #dafbe1; border-color: #4ac26b; color: var(--ok); }
+    .actions { display: flex; gap: 6px; }
+    .notes {
+      margin-top: 24px;
+      padding: 16px;
+      background: #ddf4ff;
+      border: 1px solid #54aeff;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .notes h2 { margin: 0 0 8px; font-size: 1rem; }
+    .legend { margin-top: 12px; color: var(--muted); font-size: 13px; }
+    a { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <span class="badge-proto">PROTÓTIPO DE BAIXA FIDELIDADE — Wireframe da tela principal</span>
+  <div class="toolbar">
+    <div>
+      <h1>Gerenciador de Tarefas</h1>
+      <p class="sub">Wireframe · HU-02 Listar · HU-04 Excluir · HU-05 Status</p>
+    </div>
+    <button class="btn btn-primary" type="button">+ Nova Tarefa</button>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Prioridade</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Entrega urgente do relatório</td>
+          <td><span class="pill pill-alta">Alta</span></td>
+          <td><button class="status" type="button">Pendente</button></td>
+          <td class="actions">
+            <button class="btn btn-sm" type="button">✏️ Editar</button>
+            <button class="btn btn-sm btn-danger" type="button">🗑 Excluir</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Revisar material importante</td>
+          <td><span class="pill pill-media">Média</span></td>
+          <td><button class="status done" type="button">Concluída</button></td>
+          <td class="actions">
+            <button class="btn btn-sm" type="button">✏️ Editar</button>
+            <button class="btn btn-sm btn-danger" type="button">🗑 Excluir</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Organizar anotações da aula</td>
+          <td><span class="pill pill-baixa">Baixa</span></td>
+          <td><button class="status" type="button">Pendente</button></td>
+          <td class="actions">
+            <button class="btn btn-sm" type="button">✏️ Editar</button>
+            <button class="btn btn-sm btn-danger" type="button">🗑 Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="legend">
+    Elementos: título da aplicação · botão primário de criação · DataTable com colunas rastreáveis aos campos do modelo ·
+    status clicável (UC-05) · ações de editar/excluir (UC-03, UC-04).
+  </p>
+
+  <div class="notes">
+    <h2>Notas de design (elicitação → protótipo)</h2>
+    <ul>
+      <li>Layout simples em página única — adequado ao escopo de MVP sem autenticação.</li>
+      <li>Prioridade visual por cores reforça a regra RN-03 (Alta / Média / Baixa).</li>
+      <li>Status como botão evita abrir o formulário só para concluir a tarefa (HU-05).</li>
+      <li>Versão implementada: React + Design System em <code>frontend/</code>.</li>
+    </ul>
+    <p>
+      Ver também:
+      <a href="wireframe-formulario.html">formulário modal</a> ·
+      <a href="fluxos.md">fluxos de navegação</a> ·
+      <a href="../Artefatos_Especificacao.md">artefatos completos</a>
+    </p>
+  </div>
+</body>
+</html>
