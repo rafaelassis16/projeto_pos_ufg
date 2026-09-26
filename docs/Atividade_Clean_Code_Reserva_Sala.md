@@ -1,5 +1,59 @@
 # Atividade Clean Code - Reserva de sala
 
+## Como executar o MVP para testes
+
+Os comandos abaixo devem ser executados no PowerShell a partir da pasta interna do projeto. Os sublinhados dos nomes de arquivos devem ser digitados normalmente, sem barras invertidas (`\`).
+
+### Teste visual pelo frontend
+
+1. Acesse a pasta do frontend:
+
+```powershell
+cd "C:\Users\rafaelassis\Documents\VS Code\projeto_pos_ufg\projeto_pos_ufg\frontend"
+```
+
+2. Instale as dependencias, caso seja a primeira execucao:
+
+```powershell
+npm install
+```
+
+3. Inicie a aplicacao:
+
+```powershell
+npm run dev
+```
+
+4. Abra no navegador o endereco exibido no terminal, normalmente `http://localhost:5173/`, e selecione a aba **Reserva de Sala**.
+
+Para validar as regras, podem ser usados estes exemplos:
+
+| Caso | Sala | Data | Inicio | Termino | Resultado esperado |
+|------|------|------|--------|---------|--------------------|
+| Conflito | SALA-01 | 26/09/2026 | 10:30 | 11:30 | Reserva indisponivel |
+| Limite permitido | SALA-01 | 26/09/2026 | 11:00 | 12:00 | Reserva disponivel |
+| Sala diferente | SALA-02 | 26/09/2026 | 10:30 | 11:30 | Reserva disponivel |
+| Horario invalido | SALA-01 | 26/09/2026 | 11:00 | 11:00 | Mensagem de erro |
+
+O frontend usa dados ficticios locais para demonstrar a regra de conflito. A aba **Reserva de Sala** pode ser testada sem iniciar o backend.
+
+### Testes automatizados
+
+Em outro terminal, retorne para a pasta interna do projeto e ative o ambiente virtual:
+
+```powershell
+cd "C:\Users\rafaelassis\Documents\VS Code\projeto_pos_ufg\projeto_pos_ufg"
+.\.venv\Scripts\Activate.ps1
+```
+
+Execute os testes da reserva de sala:
+
+```powershell
+python -m pytest app/tests/unit/test_room_booking.py
+```
+
+O resultado esperado e `6 passed`.
+
 ## 1. Problema definido
 
 O problema escolhido foi um toy problem de reserva de sala. O objetivo e verificar se uma nova reserva conflita com reservas ja existentes da mesma sala no mesmo dia.
