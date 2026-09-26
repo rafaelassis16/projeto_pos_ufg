@@ -44,7 +44,7 @@ export const DataTable = ({ rowData, columnDefs, loading }: any) => (
 );
 
 export const Dialog = ({ open, children }: any) => open ? (
-  <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyCenter: 'center', zIndex: 1000 }}>
+  <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
     <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '8px', maxWidth: '500px', width: '100%' }}>
       {children}
     </div>
@@ -82,7 +82,7 @@ export const Flex = ({ children, gap, justify, align, direction, style, ...props
 );
 
 export const Grid = ({ children, gap }: any) => (
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '16px' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: gap === 'small' ? '8px' : '16px' }}>
     {children}
   </div>
 );
