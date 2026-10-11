@@ -1,0 +1,276 @@
+{
+  "summary": {
+    "title": "Casos de Teste de Erro e Edge Cases - API de Gerenciamento de Tarefas",
+    "date": "2026-10-11",
+    "total_tests": 70,
+    "passed": 70,
+    "failed": 0,
+    "success_rate": "100%",
+    "execution_time_seconds": 10.18,
+    "status": "✅ TODOS OS TESTES PASSANDO"
+  },
+  "test_files": {
+    "test_error_cases.py": {
+      "total_tests": 47,
+      "passed": 47,
+      "failed": 0,
+      "categories": [
+        {
+          "name": "Validação de Dados Inválidos",
+          "tests": 12,
+          "passed": 12,
+          "coverage": [
+            "Title vazio",
+            "Title nulo",
+            "Title ausente",
+            "Title com tipo inválido",
+            "Completed com tipo inválido",
+            "Description com tipo inválido",
+            "Payload vazio",
+            "Title muito longo",
+            "Caracteres especiais"
+          ]
+        },
+        {
+          "name": "Valores Duplicados",
+          "tests": 2,
+          "passed": 2,
+          "coverage": [
+            "Múltiplos títulos iguais permitidos",
+            "Update para título existente"
+          ]
+        },
+        {
+          "name": "Estados Inconsistentes",
+          "tests": 4,
+          "passed": 4,
+          "coverage": [
+            "Toggle conclusão múltiplas vezes",
+            "Update em tarefa concluída",
+            "Delete de tarefa concluída",
+            "Update prioridade em concluída"
+          ]
+        },
+        {
+          "name": "Operações com IDs Inválidos",
+          "tests": 8,
+          "passed": 8,
+          "coverage": [
+            "ID negativo",
+            "ID zero",
+            "ID muito grande",
+            "ID string",
+            "ID float",
+            "UPDATE em ID inexistente",
+            "DELETE em ID inexistente",
+            "PATCH em ID inexistente"
+          ]
+        },
+        {
+          "name": "Query Parameters Inválidos",
+          "tests": 5,
+          "passed": 5,
+          "coverage": [
+            "Parâmetro 'maybe'",
+            "Parâmetro numérico",
+            "Coerção 'false' string",
+            "Coerção 'true' string",
+            "Parâmetro vazio"
+          ]
+        },
+        {
+          "name": "Ausência de Validação",
+          "tests": 4,
+          "passed": 4,
+          "coverage": [
+            "UPDATE com dados vazios",
+            "Setar field para null",
+            "Description muito grande (100k)",
+            "Update com description grande (50k)"
+          ]
+        },
+        {
+          "name": "Race Conditions",
+          "tests": 3,
+          "passed": 3,
+          "coverage": [
+            "Delete durante read",
+            "Update durante read",
+            "Create e read imediato"
+          ]
+        },
+        {
+          "name": "Response Integrity",
+          "tests": 7,
+          "passed": 7,
+          "coverage": [
+            "Todos campos obrigatórios presentes",
+            "Types corretos (int, str, bool)",
+            "Arrays retornados corretamente",
+            "Formato DELETE correto",
+            "Lista vazia retorna []"
+          ]
+        },
+        {
+          "name": "Filtros com Múltiplos Resultados",
+          "tests": 2,
+          "passed": 2,
+          "coverage": [
+            "Filtro completed com tarefas mistas",
+            "GET sem filtro retorna todas"
+          ]
+        }
+      ]
+    },
+    "test_integration_complex.py": {
+      "total_tests": 23,
+      "passed": 23,
+      "failed": 0,
+      "categories": [
+        {
+          "name": "Fluxos CRUD Completos",
+          "tests": 3,
+          "passed": 3,
+          "coverage": [
+            "CREATE → READ → UPDATE → DELETE",
+            "CREATE → READ → COMPLETE → READ",
+            "CREATE com múltiplos UPDATEs"
+          ]
+        },
+        {
+          "name": "Operações em Lote",
+          "tests": 4,
+          "passed": 4,
+          "coverage": [
+            "Criar 10 e filtrar",
+            "Completar todas pendentes",
+            "Deletar 5 e verificar remoção",
+            "Atualizar 3 títulos"
+          ]
+        },
+        {
+          "name": "Priority Advisor Integration",
+          "tests": 9,
+          "passed": 9,
+          "coverage": [
+            "Keywords alta prioridade (urgente, crítico)",
+            "Keywords média prioridade (importante)",
+            "Default baixa prioridade",
+            "Detecção em description",
+            "Priority explícita sobrescreve",
+            "Priority null dispara advisor",
+            "Preservação em updates",
+            "Update com novo valor"
+          ]
+        },
+        {
+          "name": "Consistência Transacional",
+          "tests": 2,
+          "passed": 2,
+          "coverage": [
+            "Estado final correto após sequência",
+            "Lista reflete todas operações"
+          ]
+        },
+        {
+          "name": "Múltiplos Estados Simultâneos",
+          "tests": 2,
+          "passed": 2,
+          "coverage": [
+            "Operações em concluídas e pendentes",
+            "Operações com diferentes prioridades"
+          ]
+        },
+        {
+          "name": "Limites de Recurso",
+          "tests": 3,
+          "passed": 3,
+          "coverage": [
+            "Criar 100 tarefas",
+            "Filtrar 50+ resultados",
+            "Listar 100 tarefas múltiplas vezes"
+          ]
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "severity": "INFO",
+      "category": "Behavior",
+      "description": "Title vazio (string '') é aceito pela API",
+      "recommendation": "Adicionar validação: min_length=1"
+    },
+    {
+      "severity": "INFO",
+      "category": "Design",
+      "description": "FastAPI coage automaticamente tipos (yes → bool)",
+      "recommendation": "Comportamento esperado do Pydantic. Considerar docs"
+    },
+    {
+      "severity": "INFO",
+      "category": "Logic",
+      "description": "Priority 'Baixa' dispara PriorityAdvisor",
+      "recommendation": "Documentar ou considerar permettir override"
+    },
+    {
+      "severity": "INFO",
+      "category": "Schema",
+      "description": "Sem constraint UNIQUE no título",
+      "recommendation": "Permitir duplicatas é design, confirmar intenção"
+    },
+    {
+      "severity": "LOW",
+      "category": "Performance",
+      "description": "Sem rate limiting em operações",
+      "recommendation": "Adicionar rate limiting para evitar abuso"
+    }
+  ],
+  "coverage_areas": {
+    "layers": {
+      "routes": "✅ Testado",
+      "services": "✅ Testado",
+      "repository": "✅ Testado (implícito)",
+      "database": "✅ Testado (SQLite)"
+    },
+    "http_methods": {
+      "GET": "✅ Testado",
+      "POST": "✅ Testado",
+      "PUT": "✅ Testado",
+      "PATCH": "✅ Testado",
+      "DELETE": "✅ Testado"
+    },
+    "response_codes": {
+      "200": "✅ Testado",
+      "404": "✅ Testado",
+      "422": "✅ Testado",
+      "500": "⚠️ Simulado"
+    }
+  },
+  "execution_environment": {
+    "os": "Windows",
+    "python_version": "3.14.3",
+    "pytest_version": "9.0.3",
+    "database": "SQLite (test.db)",
+    "framework": "FastAPI",
+    "orm": "SQLAlchemy 2.0.49"
+  },
+  "recommendations": {
+    "immediate": [
+      "Adicionar validação Min/Max length nos schemas",
+      "Adicionar constraint UNIQUE se títulos devem ser únicos",
+      "Documentar coerção automática de tipos"
+    ],
+    "short_term": [
+      "Adicionar testes unitários para cada função de service",
+      "Adicionar testes de segurança (SQL injection, XXS)",
+      "Implementar rate limiting"
+    ],
+    "long_term": [
+      "Adicionar testes de load/performance",
+      "Implementar CI/CD com execução automática de testes",
+      "Adicionar mutations testing para validar qualidade dos testes"
+    ]
+  },
+  "conclusion": "A API de Gerenciamento de Tarefas passou em todos os 70 testes de integração, cobrindo cenários de erro, edge cases, estados inconsistentes e fluxos complexos. A suíte de testes é robusta e fornece confiança na qualidade da aplicação."
+}
