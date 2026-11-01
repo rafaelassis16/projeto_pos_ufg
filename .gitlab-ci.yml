@@ -1,0 +1,25 @@
+image: python:3.11
+
+stages:
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+cache:
+  paths:
+    - .pip-cache/
+    - .venv/
+
+before_script:
+  - python --version
+  - python -m venv .venv
+  - source .venv/bin/activate
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+test_suite:
+  stage: test
+  script:
+    - pytest -v --tb=short
+
