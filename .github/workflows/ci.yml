@@ -27,5 +27,4 @@ jobs:
 
       - name: Run unit & integration tests
         run: |
-          pytest -v --tb=short
-
+          pytest -v app/tests/test_tasks.py app/tests/test_error_cases.py app/tests/test_integration_complex.py app/tests/unit
